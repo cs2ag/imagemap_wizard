@@ -273,7 +273,9 @@ class tx_imagemapwizard_model_dataObject {
 		$relAttr = $this->getAttributeKeys();
 		$ret = array();
 		foreach ($relAttr as $key) {
-			$ret[] = $key . ':\'\'';
+			if ($key) {
+				$ret[] = $key . ':\'\'';
+			}
 		}
 		return implode(',', $ret);
 	}
