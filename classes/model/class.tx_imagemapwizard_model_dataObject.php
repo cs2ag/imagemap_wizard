@@ -140,7 +140,9 @@ class tx_imagemapwizard_model_dataObject {
 	 * @return boolean
 	 */
 	public function hasValidImageFile() {
-		return is_file($this->getImageLocation(true)) && is_readable($this->getImageLocation(true));
+		return $this->getFieldValue('uid') &&
+			is_file($this->getImageLocation(true)) &&
+			is_readable($this->getImageLocation(true));
 	}
 
 	/**
