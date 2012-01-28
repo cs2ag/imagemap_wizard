@@ -74,9 +74,10 @@ class tx_imagemapwizard_wizicon {
 	 * @return   array	  The LOCAL_LANG array
 	 */
 	function includeLocalLang() {
+		/** @var $localizationParser t3lib_l10n_parser_Llxml */
+		$localizationParser = t3lib_div::makeInstance('t3lib_l10n_parser_Llxml');
 		$llFile = t3lib_extMgm::extPath('imagemap_wizard') . 'locallang.xml';
-		$LOCAL_LANG = t3lib_div::readLLXMLfile($llFile, $GLOBALS['LANG']->lang);
-		return $LOCAL_LANG;
+		return $localizationParser->getParsedData($llFile, $GLOBALS['LANG']->lang);
 	}
 }
 
