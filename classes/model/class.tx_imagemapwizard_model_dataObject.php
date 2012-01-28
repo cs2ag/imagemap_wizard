@@ -304,7 +304,7 @@ class tx_imagemapwizard_model_dataObject {
 		$keys = t3lib_div::trimExplode(',', tx_imagemapwizard_model_typo3env::getExtConfValue('additionalAttributes', ''));
 		$keys = array_diff($keys, array('alt', 'href', 'shape', 'coords'));
 		$keys = array_map("strtolower", $keys);
-		return $keys;
+		return array_filter($keys);
 	}
 
 	/**
