@@ -71,13 +71,18 @@ class tx_imagemapwizard_wizicon {
 	/**
 	 * Includes the locallang file
 	 *
-	 * @return   array	  The LOCAL_LANG array
+	 * @return array	The LOCAL_LANG array
 	 */
 	function includeLocalLang() {
-		/** @var $localizationParser t3lib_l10n_parser_Llxml */
-		$localizationParser = t3lib_div::makeInstance('t3lib_l10n_parser_Llxml');
 		$llFile = t3lib_extMgm::extPath('imagemap_wizard') . 'locallang.xml';
-		return $localizationParser->getParsedData($llFile, $GLOBALS['LANG']->lang);
+		if (version_compare(TYPO3_version, '4.6.0', '<')) {
+			$LOCAL_LANG = t3lib_div::readLLXMLfile($llFile, $GLOBALS['LANG']->lang);
+		} else {
+			/** @var $localizationParser t3lib_l10n_parser_Llxml */
+			$localizationParser = t3lib_div::makeInstance('t3lib_l10n_parser_Llxml');
+			$LOCAL_LANG = $localizationParser->getParsedData($llFile, $GLOBALS['LANG']->lang);
+		}
+		return $LOCAL_LANG;
 	}
 }
 
