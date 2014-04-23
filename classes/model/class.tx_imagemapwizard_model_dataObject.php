@@ -29,8 +29,8 @@
 
 require_once(t3lib_extMgm::extPath('imagemap_wizard') . 'classes/model/class.tx_imagemapwizard_model_typo3env.php');
 require_once(t3lib_extMgm::extPath('imagemap_wizard') . 'classes/model/class.tx_imagemapwizard_model_mapper.php');
-require_once(PATH_t3lib . 'class.t3lib_stdgraphic.php');
-require_once(PATH_tslib . 'class.tslib_gifbuilder.php');
+#require_once('t3lib_stdGraphic');
+#require_once(PATH_tslib . 'class.tslib_gifbuilder.php');
 
 class tx_imagemapwizard_model_dataObject {
 	protected $row;
@@ -172,7 +172,7 @@ class tx_imagemapwizard_model_dataObject {
 
 		// extract the image
 		$matches = array();
-		if (!preg_match('/(<img[^>]+usemap="#[^"]+"[^>]*\/>)/', $result, $matches)) {
+		if (!preg_match('/(<img[^>]+usemap="#[^"]+"[^>]*>)/', $result, $matches)) { //lacyg pregamtch change \/
 			//TODO: consider to use the normal image as fallback here instead of showing an error-message
 			return 'No Image rendered from TSFE. :(<br/>Has the page some kind of special doktype or has it access-restrictions?<br/>There are lot\'s of things which can go wrong since normally nobody creates frontend-output in the backend ;)<br/>Error was:' . $t3env->get_lastError();
 		}

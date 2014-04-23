@@ -26,6 +26,7 @@
  *
  * @author	Tolleiv Nietsch <info@tolleiv.de>
  */
+use TYPO3\CMS\Backend\Utility\BackendUtility;
 require_once(t3lib_extMgm::extPath('imagemap_wizard') . 'classes/view/class.tx_imagemapwizard_view_abstract.php');
 
 
@@ -114,9 +115,7 @@ class tx_imagemapwizard_view_wizard extends tx_imagemapwizard_view_abstract {
 	protected function linkWizardIcon($linkId, $fieldName, $fieldValue, $updateCallback = '') {
 
 		$params = array(
-			//'act' => 'page',
 			'mode' => 'wizard',
-			//'table' => 'tx_dummytable',
 			'field' => $fieldName,
 			'P[returnUrl]' => t3lib_div::linkThisScript(),
 			'P[formName]' => $this->id,
@@ -129,7 +128,9 @@ class tx_imagemapwizard_view_wizard extends tx_imagemapwizard_view_abstract {
 			$params['P[fieldChangeFunc][callback]'] = $updateCallback;
 		}
 
-		$link = t3lib_div::linkThisUrl($this->doc->backPath . 'browse_links.php', $params);
+		$link = BackendUtility::getModuleUrl('wizard_element_browser',$params,$this->doc->backPath);
+
+		//$link = t3lib_div::linkThisUrl($this->doc->backPath . 'mod.php', $params);
 		return "<a href=\"#\" id=\"" . $linkId . "\" onclick=\"this.blur(); vHWin=window.open('" . $link . "','','height=600,width=500,status=0,menubar=0,scrollbars=1');vHWin.focus();return false;\">" . $this->getIcon("gfx/link_popup.gif", "alt=\"" . $this->getLL('imagemap_wizard.form.area.linkwizard') . "\" title=\"" . $this->getLL('imagemap_wizard.form.area.linkwizard') . "\"") . "</a>";
 	}
 
