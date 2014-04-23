@@ -135,7 +135,9 @@ class tx_imagemapwizard_model_dataObject {
 				$location = $path . '/' . $this->getFieldValue($imageField, 0);
 			} else {
 				//$path = $GLOBALS['TCA'][$this->table]['columns'][$imageField]['config']['uploadfolder'];
-				$location = $fileObjects[0]->getPublicUrl();
+				if(is_object($fileObjects[0])) {
+					$location = $fileObjects[0]->getPublicUrl();
+				}
 			}
 		}
 		$loc = ($abs ? PATH_site : $this->backPath) . $location;
