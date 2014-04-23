@@ -41,18 +41,18 @@ class tx_imagemapwizard_model_typo3env {
 	 */
 	public function initTSFE($pid = 1, $ws = 0) {
 		/* local includes otherwise XCLASSES might be lost due to extension load order */
-		require_once(PATH_tslib . 'class.tslib_fe.php');
-		require_once(PATH_t3lib . 'class.t3lib_userauth.php');
-		require_once(PATH_t3lib . 'class.t3lib_userauthgroup.php');
-		require_once(PATH_t3lib . 'class.t3lib_beuserauth.php');
-		require_once(PATH_t3lib . 'class.t3lib_tsfebeuserauth.php');
-		require_once(PATH_tslib . 'class.tslib_feuserauth.php');
-		require_once(PATH_t3lib . 'class.t3lib_cs.php');
-		require_once(PATH_tslib . 'class.tslib_pagegen.php');
-		require_once(PATH_t3lib . 'class.t3lib_tstemplate.php');
-		require_once(PATH_t3lib . 'class.t3lib_page.php');
-		require_once(PATH_t3lib . 'class.t3lib_timetrack.php');
-		require_once(t3lib_extMgm::extPath('css_styled_content') . 'pi1/class.tx_cssstyledcontent_pi1.php');
+		//require_once(PATH_tslib . 'class.tslib_fe.php');
+		//require_once(PATH_t3lib . 'class.t3lib_userauth.php');
+		//require_once(PATH_t3lib . 'class.t3lib_userauthgroup.php');
+		//require_once(PATH_t3lib . 'class.t3lib_beuserauth.php');
+		//require_once(PATH_t3lib . 'class.t3lib_tsfebeuserauth.php');
+		//require_once(PATH_tslib . 'class.tslib_feuserauth.php');
+		//require_once(PATH_t3lib . 'class.t3lib_cs.php');
+		//require_once(PATH_tslib . 'class.tslib_pagegen.php');
+		//require_once(PATH_t3lib . 'class.t3lib_tstemplate.php');
+		//require_once(PATH_t3lib . 'class.t3lib_page.php');
+		//require_once(PATH_t3lib . 'class.t3lib_timetrack.php');
+		//require_once(t3lib_extMgm::extPath('css_styled_content') . 'pi1/class.tx_cssstyledcontent_pi1.php');
 		if (t3lib_extMgm::isLoaded('dam')) {
 			require_once(t3lib_extMgm::extPath('dam') . 'lib/class.tx_dam_tsfe.php');
 		}
@@ -70,7 +70,7 @@ class tx_imagemapwizard_model_typo3env {
 		} else {
 			$GLOBALS['TSFE'] = t3lib_div::makeInstance('tslib_fe', $GLOBALS['TYPO3_CONF_VARS'], $pid, '0', 0, '', '', '', '');
 		}
-		$GLOBALS['TSFE']->ADMCMD_preview_postInit(array('BEUSER_uid' => $GLOBALS['BE_USER']->user['uid']));
+		//$GLOBALS['TSFE']->ADMCMD_preview_postInit(array('BEUSER_uid' => $GLOBALS['BE_USER']->user['uid']));
 		$GLOBALS['TSFE']->config['config']['language'] = $_GET['L'];
 		$GLOBALS['TSFE']->id = $pid;
 		$GLOBALS['TSFE']->workspacePreview = $GLOBALS['BE_USER']->workspace;
@@ -119,7 +119,7 @@ class tx_imagemapwizard_model_typo3env {
 		$GLOBALS['TSFE']->TYPO3_CONF_VARS['EXT']['extCache'] = 0;
 		$GLOBALS['TSFE']->getCompressedTCarray();
 		$GLOBALS['TSFE']->inituserGroups();
-		$GLOBALS['TSFE']->workspacePreviewInit();
+		//$GLOBALS['TSFE']->workspacePreviewInit();
 		$GLOBALS['TSFE']->clear_preview();
 		unset($GLOBALS['TSFE']->TYPO3_CONF_VARS['FE']['pageNotFound_handling']);
 		$GLOBALS['TSFE']->determineId();

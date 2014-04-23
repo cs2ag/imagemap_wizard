@@ -118,8 +118,13 @@ class tx_imagemapwizard_model_dataObject {
 	 * @return string
 	 */
 	public function getImageLocation($abs = false) {
+
 		$location = '';
 		$imageField = $this->determineImageFieldName();
+
+		$fileRepository = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance('TYPO3\\CMS\\Core\\Resource\\FileRepository');
+		$fileObjects = $fileRepository->findByRelation($this->table, $imageField, $this->getFieldValue('uid'));
+
 		if ($this->table == 'tt_content' && $imageField == 'image' && t3lib_extMgm::isLoaded('dam_ttcontent') && t3lib_extMgm::isLoaded('dam')) {
 			$imageField = 'tx_damttcontent_files';
 			$damFiles = tx_dam_db::getReferencedFiles('tt_content', $this->getFieldValue('uid'), $imageField);
@@ -127,12 +132,14 @@ class tx_imagemapwizard_model_dataObject {
 		} else {
 			if ($this->isFlexField($imageField)) {
 				$path = $this->getFieldConf('config/userImage/uploadfolder');
+				$location = $path . '/' . $this->getFieldValue($imageField, 0);
 			} else {
-				$path = $GLOBALS['TCA'][$this->table]['columns'][$imageField]['config']['uploadfolder'];
+				//$path = $GLOBALS['TCA'][$this->table]['columns'][$imageField]['config']['uploadfolder'];
+				$location = $fileObjects[0]->getPublicUrl();
 			}
-			$location = $path . '/' . $this->getFieldValue($imageField, 0);
 		}
-		return ($abs ? PATH_site : $this->backPath) . $location;
+		$loc = ($abs ? PATH_site : $this->backPath) . $location;
+		return $loc;
 	}
 
 	/**
